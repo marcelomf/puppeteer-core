@@ -45,7 +45,7 @@ export class FirefoxLauncher extends ProductLauncher {
       ...(protocol === 'webDriverBiDi'
         ? {
             // Only enable the WebDriver BiDi protocol
-            'remote.active-protocols': 1,
+            'remote.active-protocols': 3, // era 1
           }
         : {
             // Do not close the window when the last tab gets closed
