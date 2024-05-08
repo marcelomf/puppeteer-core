@@ -150,15 +150,9 @@ export abstract class ProductLauncher {
 
     try {
       if (this.#product === 'firefox' && protocol === 'webDriverBiDi') {
-        cdpConnection = await this.createCdpSocketConnection(browserProcess, {
-          timeout,
-          protocolTimeout,
-          slowMo,
-        });
 
-        console.log("URL CDP CONNECTION: ",cdpConnection.url());
-
-        browser = await this.createBiDiBrowser(
+        console.log("CREATE BIDI");
+       browser = await this.createBiDiBrowser(
           browserProcess,
           browserCloseCallback,
           {
@@ -169,7 +163,18 @@ export abstract class ProductLauncher {
             ignoreHTTPSErrors,
           }
         );
-        browser.cdpConnection = cdpConnection;
+
+        console.log("CREATE CDP");
+
+        cdpConnection = await this.createCdpSocketConnection(browserProcess, {
+          timeout,
+          protocolTimeout,
+          slowMo,
+        });
+
+        console.log("URL CDP CONNECTION: ",cdpConnection.url());
+
+        browser.cdpConnection = cdpConnection;        
       } else {
         if (usePipe) {
           cdpConnection = await this.createCdpPipeConnection(browserProcess, {
