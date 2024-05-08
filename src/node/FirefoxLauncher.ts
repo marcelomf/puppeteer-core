@@ -217,6 +217,8 @@ export class FirefoxLauncher extends ProductLauncher {
       userDataDir = null,
     } = options;
 
+    process.env['MOZ_REMOTE_SETTINGS_DEVTOOLS'] = '1';
+
     const firefoxArguments = ['--no-remote'];
 
     switch (os.platform()) {
