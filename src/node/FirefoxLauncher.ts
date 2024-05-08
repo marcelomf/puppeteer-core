@@ -47,13 +47,9 @@ export class FirefoxLauncher extends ProductLauncher {
             'remote.active-protocols': 3,
           }
         : {
-            // Do not close the window when the last tab gets closed
-            'browser.tabs.closeWindowWithLastTab': false,
-            // Prevent various error message on the console
-            // jest-puppeteer asserts that no error message is emitted by the console
-            'network.cookie.cookieBehavior': 0,
-            // Temporarily force disable BFCache in parent (https://bit.ly/bug-1732263)
-            'fission.bfcacheInParent': false,
+            //'browser.tabs.closeWindowWithLastTab': false,
+            //'network.cookie.cookieBehavior': 0,
+            //'fission.bfcacheInParent': false,
             'remote.active-protocols': 3,
           }),
       // Force all web content to use a single content process. TODO: remove
@@ -61,7 +57,7 @@ export class FirefoxLauncher extends ProductLauncher {
       // context. Once this happens, webContentIsolationStrategy should only
       // be set for CDP. See
       // https://bugzilla.mozilla.org/show_bug.cgi?id=1773393
-      'fission.webContentIsolationStrategy': 0,
+      //'fission.webContentIsolationStrategy': 0,
     };
   }
 
