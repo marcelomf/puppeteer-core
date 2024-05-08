@@ -163,6 +163,7 @@ export interface DebugInfo {
  * @public
  */
 export declare abstract class Browser extends EventEmitter<BrowserEvents> {
+    cdpConnection: any;
     /**
      * @internal
      */
