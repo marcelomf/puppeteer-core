@@ -96,6 +96,7 @@ export declare abstract class ProductLauncher {
         slowMo: number;
         defaultViewport: Viewport | null;
         ignoreHTTPSErrors?: boolean;
+        port?: string;
     }): Promise<Browser>;
     /**
      * @internal

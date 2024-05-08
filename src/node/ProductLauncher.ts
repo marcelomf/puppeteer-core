@@ -151,6 +151,25 @@ export abstract class ProductLauncher {
     try {
       if (this.#product === 'firefox' && protocol === 'webDriverBiDi') {
 
+        console.log("CREATE CDP");
+
+        cdpConnection = await this.createCdpSocketConnection(browserProcess, {
+          timeout,
+          protocolTimeout,
+          slowMo,
+        });
+
+        console.log("URL CDP CONNECTION: ", cdpConnection.url());
+
+        let PORT_DEBUG;
+        try {
+          PORT_DEBUG = cdpConnection.url();
+          if(PORT_DEBUG) PORT_DEBUG = PORT_DEBUG.split(":")[2];
+          if(PORT_DEBUG) PORT_DEBUG = PORT_DEBUG.split("/")[0];
+        } catch(e) {
+          //PORT_DEBUG = '9222';
+        }
+
         console.log("CREATE BIDI");
        browser = await this.createBiDiBrowser(
           browserProcess,
@@ -161,18 +180,11 @@ export abstract class ProductLauncher {
             slowMo,
             defaultViewport,
             ignoreHTTPSErrors,
+            port: PORT_DEBUG
           }
         );
 
-        console.log("CREATE CDP");
 
-        cdpConnection = await this.createCdpSocketConnection(browserProcess, {
-          timeout,
-          protocolTimeout,
-          slowMo,
-        });
-
-        console.log("URL CDP CONNECTION: ",cdpConnection.url());
 
         browser.cdpConnection = cdpConnection;        
       } else {
@@ -390,13 +402,20 @@ export abstract class ProductLauncher {
       slowMo: number;
       defaultViewport: Viewport | null;
       ignoreHTTPSErrors?: boolean;
+      port?: string;
     }
   ): Promise<Browser> {
-    const browserWSEndpoint =
+    let browserWSEndpoint;
+    if(opts.port) {
+      browserWSEndpoint = `ws://127.0.0.1:${opts.port}/session`;
+    } else {
+      browserWSEndpoint =
       (await browserProcess.waitForLineOutput(
         WEBDRIVER_BIDI_WEBSOCKET_ENDPOINT_REGEX,
         opts.timeout
       )) + '/session';
+    }
+
     const transport = await WebSocketTransport.create(browserWSEndpoint);
     const BiDi = await import(/* webpackIgnore: true */ '../bidi/bidi.js');
     const bidiConnection = new BiDi.BidiConnection(
