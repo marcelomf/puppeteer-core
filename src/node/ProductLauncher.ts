@@ -302,11 +302,14 @@ export abstract class ProductLauncher {
     browserProcess: ReturnType<typeof launch>,
     opts: {timeout: number; protocolTimeout: number | undefined; slowMo: number}
   ): Promise<Connection> {
+    console.log("VEIO CREATE CDP");
     const browserWSEndpoint = await browserProcess.waitForLineOutput(
       CDP_WEBSOCKET_ENDPOINT_REGEX,
       opts.timeout
     );
+    console.log("VEIO CREATE TRANSPORT");
     const transport = await WebSocketTransport.create(browserWSEndpoint);
+    console.log("VEIO RETORNOCREATE TRANSPORT");
     return new Connection(
       browserWSEndpoint,
       transport,
