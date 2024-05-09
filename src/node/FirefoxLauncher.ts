@@ -56,7 +56,7 @@ export class FirefoxLauncher extends ProductLauncher {
             // Temporarily force disable BFCache in parent (https://bit.ly/bug-1732263)
             'fission.bfcacheInParent': false,
             // Only enable the CDP protocol
-            'remote.active-protocols': 2,
+            'remote.active-protocols': 3, // era 2
           }),
       // Force all web content to use a single content process. TODO: remove
       // this once Firefox supports mouse event dispatch from the main frame
