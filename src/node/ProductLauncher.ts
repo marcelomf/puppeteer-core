@@ -151,24 +151,24 @@ export abstract class ProductLauncher {
     try {
       if (this.#product === 'firefox' && protocol === 'webDriverBiDi') {
 
-        // console.log("CREATE CDP");
+        console.log("CREATE CDP");
 
-        // cdpConnection = await this.createCdpSocketConnection(browserProcess, {
-        //   timeout,
-        //   protocolTimeout,
-        //   slowMo,
-        // });
+        cdpConnection = await this.createCdpSocketConnection(browserProcess, {
+          timeout,
+          protocolTimeout,
+          slowMo,
+        });
 
-        // console.log("URL CDP CONNECTION: ", cdpConnection.url());
+        console.log("URL CDP CONNECTION: ", cdpConnection.url());
 
-        // let PORT_DEBUG;
-        // try {
-        //   PORT_DEBUG = cdpConnection.url();
-        //   if(PORT_DEBUG) PORT_DEBUG = PORT_DEBUG.split(":")[2];
-        //   if(PORT_DEBUG) PORT_DEBUG = PORT_DEBUG.split("/")[0];
-        // } catch(e) {
-        //   //PORT_DEBUG = '9222';
-        // }
+        let PORT_DEBUG;
+        try {
+          PORT_DEBUG = cdpConnection.url();
+          if(PORT_DEBUG) PORT_DEBUG = PORT_DEBUG.split(":")[2];
+          if(PORT_DEBUG) PORT_DEBUG = PORT_DEBUG.split("/")[0];
+        } catch(e) {
+          //PORT_DEBUG = '9222';
+        }
 
         console.log("CREATE BIDI");
        browser = await this.createBiDiBrowser(
