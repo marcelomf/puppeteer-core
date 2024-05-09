@@ -8,7 +8,7 @@ import type ProtocolMapping from 'devtools-protocol/types/protocol-mapping.js';
 import type {CommandOptions} from '../api/CDPSession.js';
 import {CDPSession} from '../api/CDPSession.js';
 import type {Connection as CdpConnection} from '../cdp/Connection.js';
-import {TargetCloseError, UnsupportedOperation} from '../common/Errors.js';
+import {TargetCloseError} from '../common/Errors.js';
 import {Deferred} from '../util/Deferred.js';
 
 import type {BidiConnection} from './Connection.js';
