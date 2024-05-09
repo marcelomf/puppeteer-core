@@ -16,7 +16,6 @@ export declare class BidiHTTPResponse extends HTTPResponse {
     static from(data: Bidi.Network.ResponseData, request: BidiHTTPRequest): BidiHTTPResponse;
     private constructor();
     remoteAddress(): RemoteAddress;
-    getData(): any;
     url(): string;
     status(): number;
     statusText(): string;
@@ -27,6 +26,6 @@ export declare class BidiHTTPResponse extends HTTPResponse {
     frame(): Frame | null;
     fromServiceWorker(): boolean;
     securityDetails(): never;
-    buffer(): never;
+    buffer(): any;
 }
 //# sourceMappingURL=HTTPResponse.d.ts.map

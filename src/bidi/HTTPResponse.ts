@@ -57,10 +57,6 @@ export class BidiHTTPResponse extends HTTPResponse {
     };
   }
 
-  getData(): any {
-    return this.#data;
-  }
-
   override url(): string {
     return this.#data.url;
   }
@@ -111,7 +107,7 @@ export class BidiHTTPResponse extends HTTPResponse {
     throw new UnsupportedOperation();
   }
 
-  override buffer(): never {
-    throw new UnsupportedOperation();
+  override buffer(): any {
+    return JSON.stringify(this.#data);
   }
 }
