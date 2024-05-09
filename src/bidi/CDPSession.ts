@@ -66,9 +66,7 @@ export class BidiCdpSession extends CDPSession {
     options?: CommandOptions
   ): Promise<ProtocolMapping.Commands[T]['returnType']> {
     if (this.#connection === undefined) {
-      throw new UnsupportedOperation(
-        'CDP support is required for this feature. The current browser does not support CDP.'
-      );
+      //throw new UnsupportedOperation('CDP support is required for this feature. The current browser does not support CDP.');
     }
     if (this.#detached) {
       throw new TargetCloseError(
@@ -76,6 +74,9 @@ export class BidiCdpSession extends CDPSession {
       );
     }
     const session = await this.#sessionId.valueOrThrow();
+
+    if(!this.#connection) return {};
+
     const {result} = await this.#connection.send(
       'cdp.sendCommand',
       {
