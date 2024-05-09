@@ -171,32 +171,33 @@ export abstract class ProductLauncher {
         }
 
         console.log("CREATE BIDI");
-      //  browser = await this.createBiDiBrowser(
-      //     browserProcess,
-      //     browserCloseCallback,
-      //     {
-      //       timeout,
-      //       protocolTimeout,
-      //       slowMo,
-      //       defaultViewport,
-      //       ignoreHTTPSErrors,
-      //       port: PORT_DEBUG
-      //     }
-      //   );
+       browser = await this.createBiDiBrowser(
+          browserProcess,
+          browserCloseCallback,
+          {
+            timeout,
+            protocolTimeout,
+            slowMo,
+            defaultViewport,
+            ignoreHTTPSErrors,
+            port: PORT_DEBUG
+          }
+        );
 
-      browser = await this.createBiDiOverCdpBrowser(
-        browserProcess,
-        cdpConnection,
-        browserCloseCallback,
-        {
-          timeout,
-          protocolTimeout,
-          slowMo,
-          defaultViewport,
-          ignoreHTTPSErrors,
-          port: PORT_DEBUG
-        }
-      );
+      // DA PROBLEMA DE CONTEXTO
+      // browser = await this.createBiDiOverCdpBrowser(
+      //   browserProcess,
+      //   cdpConnection,
+      //   browserCloseCallback,
+      //   {
+      //     timeout,
+      //     protocolTimeout,
+      //     slowMo,
+      //     defaultViewport,
+      //     ignoreHTTPSErrors,
+      //     port: PORT_DEBUG
+      //   }
+      // );
 
 
 
