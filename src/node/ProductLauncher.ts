@@ -253,11 +253,11 @@ export abstract class ProductLauncher {
       await this.waitForPageTarget(browser, timeout);
     }
 
-    if(protocol == "webDriverBiDi" && this.product == "firefox") {
-      console.log("ESPERA1");
-      await this.waitForPageTarget(browser, timeout);
-      console.log("ESPERA2");
-    }
+    // if(protocol == "webDriverBiDi" && this.product == "firefox") {
+    //   console.log("ESPERA1");
+    //   await this.waitForPageTarget(browser, timeout);
+    //   console.log("ESPERA2");
+    // }
 
     return browser;
   }
