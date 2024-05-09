@@ -201,7 +201,7 @@ export abstract class ProductLauncher {
 
 
 
-        browser.cdpConnection = {} //cdpConnection;        
+        browser.cdpConnection = cdpConnection;        
       } else {
         if (usePipe) {
           cdpConnection = await this.createCdpPipeConnection(browserProcess, {
