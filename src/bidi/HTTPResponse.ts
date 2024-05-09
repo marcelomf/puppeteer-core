@@ -57,6 +57,10 @@ export class BidiHTTPResponse extends HTTPResponse {
     };
   }
 
+  getData(): any {
+    return this.#data;
+  }
+
   override url(): string {
     return this.#data.url;
   }
