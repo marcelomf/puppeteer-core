@@ -180,7 +180,7 @@ export abstract class ProductLauncher {
             slowMo,
             defaultViewport,
             ignoreHTTPSErrors,
-            port: undefined //PORT_DEBUG
+            port: PORT_DEBUG
           }
         );
 
