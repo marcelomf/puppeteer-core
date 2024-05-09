@@ -150,16 +150,11 @@ export abstract class ProductLauncher {
 
     try {
       if (this.#product === 'firefox' && protocol === 'webDriverBiDi') {
-
-        console.log("CREATE CDP");
-
         cdpConnection = await this.createCdpSocketConnection(browserProcess, {
           timeout,
           protocolTimeout,
           slowMo,
         });
-
-        console.log("URL CDP CONNECTION: ", cdpConnection.url());
 
         let PORT_DEBUG;
         try {
@@ -169,8 +164,6 @@ export abstract class ProductLauncher {
         } catch(e) {
           //PORT_DEBUG = '9222';
         }
-
-        console.log("CREATE BIDI");
        browser = await this.createBiDiBrowser(
           browserProcess,
           browserCloseCallback,
@@ -198,9 +191,6 @@ export abstract class ProductLauncher {
       //     port: PORT_DEBUG
       //   }
       // );
-
-
-
         browser.cdpConnection = cdpConnection;        
       } else {
         if (usePipe) {
@@ -253,12 +243,6 @@ export abstract class ProductLauncher {
     if (waitForInitialPage && protocol !== 'webDriverBiDi') {
       await this.waitForPageTarget(browser, timeout);
     }
-
-    // if(protocol == "webDriverBiDi" && this.product == "firefox") {
-    //   console.log("ESPERA1");
-    //   await this.waitForPageTarget(browser, timeout);
-    //   console.log("ESPERA2");
-    // }
 
     return browser;
   }
@@ -349,14 +333,13 @@ export abstract class ProductLauncher {
     browserProcess: ReturnType<typeof launch>,
     opts: {timeout: number; protocolTimeout: number | undefined; slowMo: number}
   ): Promise<Connection> {
-    console.log("VEIO CREATE CDP");
     const browserWSEndpoint = await browserProcess.waitForLineOutput(
       CDP_WEBSOCKET_ENDPOINT_REGEX,
       opts.timeout
     );
-    console.log("VEIO CREATE TRANSPORT");
+
     const transport = await WebSocketTransport.create(browserWSEndpoint);
-    console.log("VEIO RETORNOCREATE TRANSPORT");
+
     return new Connection(
       browserWSEndpoint,
       transport,
